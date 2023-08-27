@@ -32,4 +32,14 @@ public class Templates {
     public static native TemplateInstance createOrUpdatePetForm(Owner owner, Pet pet, List<PetType> petTypes, Map<String, String> errors);
 
     public static native TemplateInstance createOrUpdateVisitForm(Pet pet, Visit visit, Map<String, String> errors);
+
+    public static native TemplateInstance registerUserForm();
+
+    public static native TemplateInstance loginUserForm();
+
+    public static native TemplateInstance registrationSuccess();
+
+    public static native TemplateInstance loginSuccess();
+
+    public static native TemplateInstance loginFailure();
 }

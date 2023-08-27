@@ -99,4 +99,25 @@ public interface AppMessages {
     @Message("Something happened...")
     String something_wrong();
 
+    @Message("Register User")
+    String register_user();
+
+    @Message("Register")
+    String register();
+
+    @Message("Registration Successful")
+    String registration_successful_message();
+
+    @Message("Registration Failure")
+    String registration_failure_message();
+
+    @Message("Login")
+    String login();
+
+    @Message("Login Failure")
+    String login_failure_message();
+
+    @Message("Login Error")
+    String login_error_message();
+
 }

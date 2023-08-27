@@ -1,5 +1,6 @@
 package org.quarkus.samples.petclinic.vet;
 
+import io.quarkus.security.Authenticated;
 import org.quarkus.samples.petclinic.system.Templates;
 import org.quarkus.samples.petclinic.system.TemplatesLocale;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/")
+@Authenticated
 public class VetResource {
     
     @Inject
