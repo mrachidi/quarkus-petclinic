@@ -150,5 +150,22 @@ public interface AppMessages {
     @Message("Logout Success")
     String logout_success();
 
+    @Message("First Name")
+    String first_name();
+
+    @Message("Registration Successful")
+    String register_success();
+
+    @Message("Confirm Password")
+    String confirm_password();
+
+    @Message("Registration Failed")
+    String register_failure();
+
+    @Message("A user with this email already exists.")
+    String user_already_exists_message();
+
+
+
 }
 

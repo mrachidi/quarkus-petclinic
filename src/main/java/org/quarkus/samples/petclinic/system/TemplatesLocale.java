@@ -70,6 +70,18 @@ public class TemplatesLocale {
         return Templates.logoutSuccess().setAttribute("locale", getConfiguredLocale());
     }
 
+    public TemplateInstance registerUserForm() {
+        return Templates.registerUserForm().setAttribute("locale", getConfiguredLocale());
+    }
+
+    public TemplateInstance registerSuccessful() {
+        return Templates.registerSuccessful().setAttribute("locale", getConfiguredLocale());
+    }
+
+    public TemplateInstance registerFailure() {
+        return Templates.registerFailure().setAttribute("locale", getConfiguredLocale());
+    }
+
     protected Locale getConfiguredLocale() {
         return  Locale.getDefault();
     }

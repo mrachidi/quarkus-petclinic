@@ -11,7 +11,6 @@ public class UserForm {
     @FormParam("password")
     private String password;
 
-    // Constructors, getters, and setters
 
     public String getEmail() {
         return email;
@@ -29,3 +28,4 @@ public class UserForm {
         this.password = password;
     }
 }
+

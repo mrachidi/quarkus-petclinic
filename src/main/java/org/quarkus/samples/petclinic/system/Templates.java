@@ -40,5 +40,11 @@ public class Templates {
     public static native TemplateInstance loginFailure();
 
     public static native TemplateInstance logoutSuccess();
+
+    public static native TemplateInstance registerUserForm();
+
+    public static native TemplateInstance registerSuccessful();
+
+    public static native TemplateInstance registerFailure();
 }
 

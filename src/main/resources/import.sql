@@ -52,6 +52,8 @@ INSERT INTO visits(id, pet_id, visit_date, description) VALUES (1002, 1008, '201
 INSERT INTO visits(id, pet_id, visit_date, description) VALUES (1003, 1008, '2013-01-03', 'neutered');
 INSERT INTO visits(id, pet_id, visit_date, description) VALUES (1004, 1007, '2013-01-04', 'spayed');
 
-INSERT INTO users(id, email, password_hash) VALUES (1, 'jennifer.Dowd@gov.bc.ca', '$2a$12$kn0po41tlKpvT1ATY41smeLAMKA7BuR5bzqL2645FKtyHosuiJoEK');
-INSERT INTO users(id, email, password_hash) VALUES (2, 'cristina.Bernal@gov.bc.ca', '$2a$12$gx6RdGMx0E2zDZhxyxEUgOxgtbGBYxcN8ma807005Yf7YBH21no0K');
-INSERT INTO users(id, email, password_hash) VALUES (3, 'test@gmail.com', '$2a$12$Vksbf8uWpcl83H71T66hNe2BEqlKbE4.reeQYMGaR9VAuH7aiTDZ.');
+INSERT INTO users(id, email, password_hash) VALUES (1000, 'jennifer.Dowd@gov.bc.ca', '$2a$12$kn0po41tlKpvT1ATY41smeLAMKA7BuR5bzqL2645FKtyHosuiJoEK');
+INSERT INTO users(id, email, password_hash) VALUES (1001, 'cristina.Bernal@gov.bc.ca', '$2a$12$gx6RdGMx0E2zDZhxyxEUgOxgtbGBYxcN8ma807005Yf7YBH21no0K');
+INSERT INTO users(id, email, password_hash) VALUES (1002, 'test@gmail.com', '$2a$12$Vksbf8uWpcl83H71T66hNe2BEqlKbE4.reeQYMGaR9VAuH7aiTDZ.');
+
+

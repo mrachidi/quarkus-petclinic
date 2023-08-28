@@ -6,10 +6,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.ws.rs.FormParam;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 
 @MappedSuperclass
-public class Person extends PanacheEntity {
+public class Person extends PanacheEntityBase {
     
     @Column(name = "first_name")
     @NotEmpty
@@ -27,3 +28,4 @@ public class Person extends PanacheEntity {
     }
 
 }
+

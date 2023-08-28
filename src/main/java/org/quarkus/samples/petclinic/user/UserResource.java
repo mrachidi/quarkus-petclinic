@@ -44,13 +44,33 @@ public class UserResource {
         }
     }
 
-}
-
-// Create a new class to wrap the JWT token in the JSON response
-class TokenResponse {
-    public String token;
-    public TokenResponse(String token) {
-        this.token = token;
+    @GET
+    @Path("/register")
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance registerTemplate() {
+        logger.info("Rendering registration template");
+        return templates.registerUserForm();
     }
+
+    @POST
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_HTML)
+    public Response registerUser(@BeanParam UserRegistrationForm userRegistrationForm) {
+        try {
+            logger.info("Starting registration process...");
+            if (userService.registerUser(userRegistrationForm)) {
+                logger.info("Registration successful.");
+                return Response.ok(templates.registerSuccessful()).build();
+            } else {
+                logger.info("Registration failed. Email already exists.");
+                return Response.status(Response.Status.BAD_REQUEST).entity(templates.registerFailure()).build();
+            }
+        } catch (Exception e) {
+            logger.error("An exception occurred during registration: {}", e.getMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error occurred").build();
+        }
+    }
+
 }
 
