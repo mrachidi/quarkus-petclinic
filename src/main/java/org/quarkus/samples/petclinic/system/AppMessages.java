@@ -120,4 +120,35 @@ public interface AppMessages {
     @Message("Login Error")
     String login_error_message();
 
+    @Message("Password")
+    String password();
+
+    @Message("Email")
+    String email();
+
+    @Message("Login Failed")
+    String login_failed_message();
+
+    @Message("Try Again")
+    String try_again();
+
+    @Message("Login Failure")
+    String login_failure();
+
+    @Message("Login Successful")
+    String login_successful_message();
+
+    @Message("Login Success")
+    String login_success();
+
+    @Message("Logout Successful")
+    String logout_successful_message();
+
+    @Message("Login Again")
+    String login_again();
+
+    @Message("Logout Success")
+    String logout_success();
+
 }
+

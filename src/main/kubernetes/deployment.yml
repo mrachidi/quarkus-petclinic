@@ -60,3 +60,13 @@ spec:
         - containerPort: 8080
           name: http
           protocol: TCP
+        volumeMounts:
+          - name: jwt-private-key-volume
+            mountPath: "/etc/secrets/jwt"
+            readOnly: true
+      volumes:
+        - name: jwt-private-key-volume
+          secret:
+            secretName: jwt-private-key
+
+

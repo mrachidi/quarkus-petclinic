@@ -1,59 +1,56 @@
 package org.quarkus.samples.petclinic.user;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
 import io.quarkus.qute.TemplateInstance;
-import io.quarkus.security.Authenticated;
 import org.quarkus.samples.petclinic.system.TemplatesLocale;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/users")
 public class UserResource {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
+
     @Inject
-    UserService userService; // Your user service for authentication and user management
+    UserService userService;
 
     @Inject
     TemplatesLocale templates;
 
     @GET
-    @Path("/register")
-    @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance registerTemplate() {
-        return templates.registerUserForm();
-    }
-
-    @POST
-    @Path("/register")
-    @Produces(MediaType.TEXT_HTML)
-    @Transactional
-    public TemplateInstance registerUser(@BeanParam UserForm userForm) {
-        User newUser = new User();
-        newUser.email = userForm.getEmail();
-        newUser.passwordHash = userService.hashPassword(userForm.getPassword());
-
-        userService.registerUser(newUser);
-
-        return templates.registrationSuccess();
-    }
-
-    @GET
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance loginTemplate() {
+        logger.info("Rendering login template");
         return templates.loginUserForm();
     }
 
     @POST
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance loginUser(@BeanParam UserForm userForm) {
-        if (userService.authenticateUser(userForm.getEmail(), userForm.getPassword())) {
-            // User authenticated successfully, create session or token
-            return templates.loginSuccess();
+    public Response loginUser(@BeanParam UserForm userForm) {
+        logger.info("Attempting to login user with email: {}", userForm.getEmail());
+        String jwt = userService.authenticateUser(userForm.getEmail(), userForm.getPassword());
+
+        if (jwt != null) {
+            NewCookie cookie = new NewCookie("token", jwt); // set the token as a cookie
+            return Response.ok(templates.loginSuccess()).cookie(cookie).build(); // add cookie to response
         } else {
-            return templates.loginFailure();
+            return Response.status(Response.Status.UNAUTHORIZED).entity(templates.loginFailure()).build();
         }
     }
+
 }
+
+// Create a new class to wrap the JWT token in the JSON response
+class TokenResponse {
+    public String token;
+    public TokenResponse(String token) {
+        this.token = token;
+    }
+}
+

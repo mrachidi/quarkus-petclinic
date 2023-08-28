@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 import io.quarkus.qute.TemplateInstance;
 
 @Path("/owners")
-@Authenticated
+
 public class OwnersResource {
 
     @Inject
@@ -38,6 +38,7 @@ public class OwnersResource {
 
     @GET
     @Path("/find")
+    @Authenticated
     @Produces(MediaType.TEXT_HTML)
     /**
      * Renders the findOwners.html
@@ -175,3 +176,4 @@ public class OwnersResource {
     }
 
 }
+

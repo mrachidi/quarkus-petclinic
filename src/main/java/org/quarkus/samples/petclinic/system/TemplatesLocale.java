@@ -54,16 +54,8 @@ public class TemplatesLocale {
         return Templates.createOrUpdateVisitForm(pet, visit, errors).setAttribute("locale", getConfiguredLocale());
     }
 
-    public TemplateInstance registerUserForm() {
-        return Templates.registerUserForm().setAttribute("locale", getConfiguredLocale());
-    }
-
     public TemplateInstance loginUserForm() {
         return Templates.loginUserForm().setAttribute("locale", getConfiguredLocale());
-    }
-
-    public TemplateInstance registrationSuccess() {
-        return Templates.registrationSuccess().setAttribute("locale", getConfiguredLocale());
     }
 
     public TemplateInstance loginSuccess() {
@@ -74,9 +66,13 @@ public class TemplatesLocale {
         return Templates.loginFailure().setAttribute("locale", getConfiguredLocale());
     }
 
+    public TemplateInstance logoutSuccess() {
+        return Templates.logoutSuccess().setAttribute("locale", getConfiguredLocale());
+    }
 
     protected Locale getConfiguredLocale() {
         return  Locale.getDefault();
     }
 
 }
+

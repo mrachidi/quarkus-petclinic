@@ -1,33 +1,37 @@
 package org.quarkus.samples.petclinic.user;
 
+import io.smallrye.jwt.build.Jwt;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import org.mindrot.jbcrypt.BCrypt; // You'll need to add the BCrypt library to your project
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.time.Duration;
 
 @ApplicationScoped
 public class UserService {
 
     @Inject
-    UserRepository userRepository; // Your repository for user data access
+    UserRepository userRepository;
 
     // Hashes a password using BCrypt
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    // Registers a new user
-    @Transactional
-    public void registerUser(User newUser) {
-        userRepository.persist(newUser);
+    // Authenticates a user and returns the JWT if successful
+    public String authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user != null && BCrypt.checkpw(password, user.passwordHash)) {
+            return generateJwt(email);
+        }
+        return null;
     }
 
-    // Authenticates a user
-    public boolean authenticateUser(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
-            return BCrypt.checkpw(password, user.passwordHash);
-        }
-        return false;
+    private String generateJwt(String email) {
+        return Jwt.issuer("JWTToekenIssuer")
+                .upn(email)
+                .expiresIn(Duration.ofHours(1))  // Optional: Sets an expiry time of 1 hour
+                .sign();
     }
 }
+
