@@ -29,6 +29,8 @@ public class UserResource {
         return templates.loginUserForm();
     }
 
+
+    //I should make some changes here especially regarding jwt handling
     @POST
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
